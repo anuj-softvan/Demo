@@ -4,15 +4,17 @@ using Demo.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
 namespace Demo.Migrations
 {
     [DbContext(typeof(DemoDbContext))]
-    partial class DemoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211011050341_Add_VirtualMeetingInfo_Entity")]
+    partial class Add_VirtualMeetingInfo_Entity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -290,73 +292,6 @@ namespace Demo.Migrations
                     b.ToTable("AppCivitMeeting");
                 });
 
-            modelBuilder.Entity("Demo.InspectMasterCategory.InspectMstCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AppTypeIdnCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("ChkFormID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)")
-                        .HasColumnName("ConcurrencyStamp");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("CreationTime");
-
-                    b.Property<Guid?>("CreatorId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("CreatorId");
-
-                    b.Property<Guid?>("DeleterId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("DeleterId");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("DeletionTime");
-
-                    b.Property<string>("ExtraProperties")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("ExtraProperties");
-
-                    b.Property<string>("InspectCatIdnCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false)
-                        .HasColumnName("IsDeleted");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("LastModificationTime");
-
-                    b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("LastModifierId");
-
-                    b.Property<int>("OrgID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PermitIdnCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppInspectMstCategory");
-                });
-
             modelBuilder.Entity("Demo.InspectSchMeetings.InspectProjHead", b =>
                 {
                     b.Property<int>("Id")
@@ -556,9 +491,6 @@ namespace Demo.Migrations
                         .HasColumnType("tinyint");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("InspectSchID")
-                        .IsUnique();
 
                     b.ToTable("AppInspectSchVirtualMeetInfo");
                 });
@@ -2689,17 +2621,6 @@ namespace Demo.Migrations
                     b.Navigation("InspectProjHead");
                 });
 
-            modelBuilder.Entity("Demo.InspectSchMeetings.InspectSchVirtualMeetInfo", b =>
-                {
-                    b.HasOne("Demo.InspectSchMeetings.InspectSchMeeting", "InspectSchMeeting")
-                        .WithOne("InspectSchVirtualMeetInfo")
-                        .HasForeignKey("Demo.InspectSchMeetings.InspectSchVirtualMeetInfo", "InspectSchID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("InspectSchMeeting");
-                });
-
             modelBuilder.Entity("Demo.MeetingParticipent.MeetingParticipents", b =>
                 {
                     b.HasOne("Demo.CivitMeetings.CivitMeeting", "CivitMeeting")
@@ -3003,11 +2924,6 @@ namespace Demo.Migrations
             modelBuilder.Entity("Demo.InspectSchMeetings.InspectProjHead", b =>
                 {
                     b.Navigation("InspectSchMeeting");
-                });
-
-            modelBuilder.Entity("Demo.InspectSchMeetings.InspectSchMeeting", b =>
-                {
-                    b.Navigation("InspectSchVirtualMeetInfo");
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>

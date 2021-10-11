@@ -21,6 +21,7 @@ using Volo.Abp.TenantManagement.EntityFrameworkCore;
 using Demo.MeetingParticipent;
 using Demo.CivitMeetings;
 using Demo.InspectSchMeetings;
+using Demo.InspectMasterCategory;
 
 namespace Demo.EntityFrameworkCore
 {
@@ -74,6 +75,10 @@ namespace Demo.EntityFrameworkCore
         public DbSet<MeetingParticipents> meetingParticipents { get; set; }
         public DbSet<CivitMeeting> civitMeetings { get; set; }
         public DbSet<InspectSchMeeting> IspectSchMeeting { get; set; }
+        public DbSet<InspectProjHead> InspectProjHead { get; set; }
+        public DbSet<InspectSchVirtualMeetInfo> InspectSchVirtualMeetInfo { get; set; }
+        public DbSet<InspectMstCategory> InspectMstCategory { get; set; }
+  
 
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -201,12 +206,60 @@ namespace Demo.EntityFrameworkCore
                     DemoConsts.DbSchema);
                 b.ConfigureByConvention(); //auto configure for the base class props
                 b.Property(x => x.InsProjHeadID).HasMaxLength(4);
-                b.Property(x => x.MeetingMode).HasMaxLength(4);
+                //b.Property(x => x.MeetingMode).HasMaxLength(4);
                 b.Property(x => x.MeetingDate);
                 b.Property(x => x.SlotStart);
                 b.Property(x => x.SlotEnd);
                 b.Property(x => x.MeetingStatus);
+                b.HasOne(a => a.InspectSchVirtualMeetInfo)
+    .WithOne(a => a.InspectSchMeeting)
+    .HasForeignKey<InspectSchVirtualMeetInfo>(c => c.InspectSchID);
+
+                //              b.HasOne<InspectProjHead>(c => c.InspectProjHead).WithOne(ad => ad.InspectSchMeeting)
+                //.HasForeignKey<InspectSchMeeting>(ad => ad.InsProjHeadID);
+
             });
+            builder.Entity<InspectProjHead>(b =>
+            {
+                b.ToTable(DemoConsts.DbTablePrefix + "InspectProjHead",
+                    DemoConsts.DbSchema);
+                b.ConfigureByConvention(); //auto configure for the base class props                
+                b.Property(x => x.OrgID).HasMaxLength(4);
+                b.Property(x => x.ProjectID).HasMaxLength(4);
+                b.Property(x => x.InspectSeqNum);
+                b.Property(x => x.Status);         
+     b.HasOne(a => a.InspectSchMeeting)
+     .WithOne(a => a.InspectProjHead)
+     .HasForeignKey<InspectSchMeeting>(c => c.InsProjHeadID);
+
+
+            });
+            builder.Entity<InspectSchVirtualMeetInfo>(b =>
+            {
+                b.ToTable(DemoConsts.DbTablePrefix + "InspectSchVirtualMeetInfo",
+                    DemoConsts.DbSchema);
+                b.ConfigureByConvention(); //auto configure for the base class props
+                b.Property(x => x.InspectSchID).IsRequired();
+                b.Property(x => x.VirtualMeetApp);
+                b.Property(x => x.MeetingLink).HasMaxLength(200);
+   
+            });
+            builder.Entity<InspectMstCategory>(b =>
+            {
+                b.ToTable(DemoConsts.DbTablePrefix + "InspectMstCategory",
+                    DemoConsts.DbSchema);
+                b.ConfigureByConvention(); //auto configure for the base class props
+                b.Property(x => x.OrgID).IsRequired();
+                b.Property(x => x.InspectCatIdnCode);
+                b.Property(x => x.PermitIdnCode);
+                b.Property(x => x.AppTypeIdnCode);
+                b.Property(x => x.ChkFormID);
+            });
+
+            //        builder.Entity<InspectProjHead>()
+            //.HasOne<InspectSchMeeting>(s => s.InspectSchMeeting)
+            //.WithOne(ad => ad.InspectProjHead)
+            //.HasForeignKey<InspectSchMeeting>(ad => ad.InsProjHeadID);
         }
     }
 }

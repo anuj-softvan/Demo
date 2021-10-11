@@ -1,4 +1,5 @@
 ﻿using Demo.CivitMeetings;
+using Demo.InspectMasterCategory;
 using Demo.InspectSchMeetings;
 using Demo.MeetingInspector;
 using Microsoft.AspNetCore.Builder;
@@ -18,6 +19,7 @@ namespace Demo
             services.AddScoped<IMeetingInspectorAfl, MeetingInspectorBll>();
             services.AddScoped<ICivitMeetingAfl, CivitMeetingBll>();
             services.AddScoped<IInspectSchMeetingAfl,InspectSchMeetingBll>();
+            services.AddScoped<IInspectMstCategoryAfl, InspectMstCategoryBll>();
             services.AddApplication<DemoHttpApiHostModule>();
             //            services.AddControllersWithViews()
             //    .AddNewtonsoftJson(options =>

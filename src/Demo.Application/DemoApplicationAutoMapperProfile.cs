@@ -2,6 +2,7 @@
 using Demo.Authors;
 using Demo.Books;
 using Demo.CivitMeetings;
+using Demo.InspectMasterCategory;
 using Demo.InspectSchMeetings;
 using Demo.MeetingInspector;
 using Demo.MeetingParticipent;
@@ -28,6 +29,9 @@ namespace Demo
             CreateMap<CreateMeetingParticipentDto,MeetingParticipents>();
             CreateMap<CreateUpdateInspectSchMeetingDto, InspectSchMeeting>();
             CreateMap<InspectSchMeeting, InspectSchMeetingDto>();
+            CreateMap<InspectSchVirtualMeetInfoDto, InspectSchVirtualMeetInfo>();
+            CreateMap<CreateUpdateInspectMstCategoryDto, InspectMstCategory>();
+            CreateMap<InspectMstCategory, InspectMstCategoryDto>();
             /* You can configure your AutoMapper mapping configuration here.
              * Alternatively, you can split your mapping configurations
              * into multiple profile classes for a better organization. */

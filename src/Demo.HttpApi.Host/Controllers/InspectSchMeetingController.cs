@@ -27,9 +27,9 @@ namespace Demo.Controllers
         }
         [HttpPost]
         [Route("createInspectSchMeeting")]
-        public async Task<IActionResult> CreateInspectSchMeeting(CreateUpdateInspectSchMeetingDto createUpdateInspectSchMeetingDto)
+        public async Task<IActionResult> CreateInspectSchMeeting(int InsProjHeadID,CreateUpdateInspectSchMeetingDto createUpdateInspectSchMeetingDto)
         {
-            var data_Result = await _inspectSchMeetingAfl.CreateAsync(createUpdateInspectSchMeetingDto);
+            var data_Result = await _inspectSchMeetingAfl.CreateAsync(InsProjHeadID,createUpdateInspectSchMeetingDto);
             return Ok(data_Result);
         }
 

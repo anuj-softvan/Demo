@@ -4,15 +4,17 @@ using Demo.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Volo.Abp.EntityFrameworkCore;
 
 namespace Demo.Migrations
 {
     [DbContext(typeof(DemoDbContext))]
-    partial class DemoDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211009082022_Change_InspectSchMeeting_Entity")]
+    partial class Change_InspectSchMeeting_Entity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -290,139 +292,6 @@ namespace Demo.Migrations
                     b.ToTable("AppCivitMeeting");
                 });
 
-            modelBuilder.Entity("Demo.InspectMasterCategory.InspectMstCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AppTypeIdnCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid>("ChkFormID")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)")
-                        .HasColumnName("ConcurrencyStamp");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("CreationTime");
-
-                    b.Property<Guid?>("CreatorId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("CreatorId");
-
-                    b.Property<Guid?>("DeleterId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("DeleterId");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("DeletionTime");
-
-                    b.Property<string>("ExtraProperties")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("ExtraProperties");
-
-                    b.Property<string>("InspectCatIdnCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false)
-                        .HasColumnName("IsDeleted");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("LastModificationTime");
-
-                    b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("LastModifierId");
-
-                    b.Property<int>("OrgID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PermitIdnCode")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppInspectMstCategory");
-                });
-
-            modelBuilder.Entity("Demo.InspectSchMeetings.InspectProjHead", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)")
-                        .HasColumnName("ConcurrencyStamp");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("CreationTime");
-
-                    b.Property<Guid?>("CreatorId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("CreatorId");
-
-                    b.Property<Guid?>("DeleterId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("DeleterId");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("DeletionTime");
-
-                    b.Property<string>("ExtraProperties")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("ExtraProperties");
-
-                    b.Property<string>("InspectSeqNum")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false)
-                        .HasColumnName("IsDeleted");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("LastModificationTime");
-
-                    b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("LastModifierId");
-
-                    b.Property<int>("OrgID")
-                        .HasMaxLength(4)
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProjectID")
-                        .HasMaxLength(4)
-                        .HasColumnType("int");
-
-                    b.Property<byte>("Status")
-                        .HasColumnType("tinyint");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AppInspectProjHead");
-                });
-
             modelBuilder.Entity("Demo.InspectSchMeetings.InspectSchMeeting", b =>
                 {
                     b.Property<int>("Id")
@@ -456,7 +325,7 @@ namespace Demo.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("ExtraProperties");
 
-                    b.Property<int?>("InsProjHeadID")
+                    b.Property<int>("InsProjHeadID")
                         .HasMaxLength(4)
                         .HasColumnType("int");
 
@@ -477,9 +346,6 @@ namespace Demo.Migrations
                     b.Property<DateTime>("MeetingDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<byte>("MeetingMode")
-                        .HasColumnType("tinyint");
-
                     b.Property<byte>("MeetingStatus")
                         .HasColumnType("tinyint");
 
@@ -491,76 +357,7 @@ namespace Demo.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InsProjHeadID")
-                        .IsUnique()
-                        .HasFilter("[InsProjHeadID] IS NOT NULL");
-
                     b.ToTable("AppInspectSchMeeting");
-                });
-
-            modelBuilder.Entity("Demo.InspectSchMeetings.InspectSchVirtualMeetInfo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasMaxLength(40)
-                        .HasColumnType("nvarchar(40)")
-                        .HasColumnName("ConcurrencyStamp");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("CreationTime");
-
-                    b.Property<Guid?>("CreatorId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("CreatorId");
-
-                    b.Property<Guid?>("DeleterId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("DeleterId");
-
-                    b.Property<DateTime?>("DeletionTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("DeletionTime");
-
-                    b.Property<string>("ExtraProperties")
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("ExtraProperties");
-
-                    b.Property<int>("InspectSchID")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsDeleted")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(false)
-                        .HasColumnName("IsDeleted");
-
-                    b.Property<DateTime?>("LastModificationTime")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("LastModificationTime");
-
-                    b.Property<Guid?>("LastModifierId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("LastModifierId");
-
-                    b.Property<string>("MeetingLink")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
-
-                    b.Property<byte>("VirtualMeetApp")
-                        .HasColumnType("tinyint");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("InspectSchID")
-                        .IsUnique();
-
-                    b.ToTable("AppInspectSchVirtualMeetInfo");
                 });
 
             modelBuilder.Entity("Demo.MeetingInspector.MeetingInspectors", b =>
@@ -2680,26 +2477,6 @@ namespace Demo.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Demo.InspectSchMeetings.InspectSchMeeting", b =>
-                {
-                    b.HasOne("Demo.InspectSchMeetings.InspectProjHead", "InspectProjHead")
-                        .WithOne("InspectSchMeeting")
-                        .HasForeignKey("Demo.InspectSchMeetings.InspectSchMeeting", "InsProjHeadID");
-
-                    b.Navigation("InspectProjHead");
-                });
-
-            modelBuilder.Entity("Demo.InspectSchMeetings.InspectSchVirtualMeetInfo", b =>
-                {
-                    b.HasOne("Demo.InspectSchMeetings.InspectSchMeeting", "InspectSchMeeting")
-                        .WithOne("InspectSchVirtualMeetInfo")
-                        .HasForeignKey("Demo.InspectSchMeetings.InspectSchVirtualMeetInfo", "InspectSchID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("InspectSchMeeting");
-                });
-
             modelBuilder.Entity("Demo.MeetingParticipent.MeetingParticipents", b =>
                 {
                     b.HasOne("Demo.CivitMeetings.CivitMeeting", "CivitMeeting")
@@ -2998,16 +2775,6 @@ namespace Demo.Migrations
             modelBuilder.Entity("Demo.CivitMeetings.CivitMeeting", b =>
                 {
                     b.Navigation("MeetingParticipents");
-                });
-
-            modelBuilder.Entity("Demo.InspectSchMeetings.InspectProjHead", b =>
-                {
-                    b.Navigation("InspectSchMeeting");
-                });
-
-            modelBuilder.Entity("Demo.InspectSchMeetings.InspectSchMeeting", b =>
-                {
-                    b.Navigation("InspectSchVirtualMeetInfo");
                 });
 
             modelBuilder.Entity("Volo.Abp.AuditLogging.AuditLog", b =>

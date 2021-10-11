@@ -10,7 +10,7 @@ namespace Demo.InspectSchMeetings
     {
         Task<InspectSchMeetingDto> GetAsync(int id);
 
-        Task<InspectSchMeetingDto> CreateAsync(CreateUpdateInspectSchMeetingDto input);
+        Task<InspectSchMeetingDto> CreateAsync(int InsProjHeadID,CreateUpdateInspectSchMeetingDto input);
 
         Task UpdateAsync(int id, CreateUpdateInspectSchMeetingDto input);
 

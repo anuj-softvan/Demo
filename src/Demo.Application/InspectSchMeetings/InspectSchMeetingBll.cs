@@ -14,11 +14,22 @@ namespace Demo.InspectSchMeetings
             _inspectSchMeetings = inspectSchMeetings;
         }
 
-        public async Task<InspectSchMeetingDto> CreateAsync(CreateUpdateInspectSchMeetingDto input)
+        public async Task<InspectSchMeetingDto> CreateAsync(int InsProjHeadID,CreateUpdateInspectSchMeetingDto input)
         {
-            var result = ObjectMapper.Map<CreateUpdateInspectSchMeetingDto, InspectSchMeeting>(input);
-            await _inspectSchMeetings.InsertAsync(result);
-            return ObjectMapper.Map<InspectSchMeeting, InspectSchMeetingDto>(result);           
+            InspectSchMeeting inspectSchMeetings;
+            inspectSchMeetings = ObjectMapper.Map<CreateUpdateInspectSchMeetingDto, InspectSchMeeting>(input);
+
+            var objVirtualInfo = new InspectSchVirtualMeetInfoDto();
+            if(input.MeetingMode == MeetingType.AR_VR || input.MeetingMode == MeetingType.Video) 
+            {
+                InspectSchVirtualMeetInfo inspectSchVirtualMeetInfo = new InspectSchVirtualMeetInfo();
+                inspectSchVirtualMeetInfo.VirtualMeetApp = 0;
+                inspectSchVirtualMeetInfo.InspectSchID = InsProjHeadID;
+               // var result_virtualinfo = ObjectMapper.Map<InspectSchVirtualMeetInfoDto, InspectSchVirtualMeetInfo>(objVirtualInfo);
+                inspectSchMeetings.InspectSchVirtualMeetInfo = inspectSchVirtualMeetInfo;
+            }                                 
+            await _inspectSchMeetings.InsertAsync(inspectSchMeetings);
+            return ObjectMapper.Map<InspectSchMeeting, InspectSchMeetingDto>(inspectSchMeetings);           
         }
 
         public async Task DeleteAsync(int id)
@@ -35,7 +46,7 @@ namespace Demo.InspectSchMeetings
         public async Task UpdateAsync(int id, CreateUpdateInspectSchMeetingDto input)
         {
             var existing_data = await _inspectSchMeetings.GetAsync(id);
-            existing_data.InsProjHeadID = input.InsProjHeadID;
+            //existing_data.InsProjHeadID = input.InsProjHeadID;
             existing_data.MeetingDate = input.MeetingDate;
             existing_data.MeetingMode = input.MeetingMode;
             existing_data.MeetingStatus = input.MeetingStatus;
