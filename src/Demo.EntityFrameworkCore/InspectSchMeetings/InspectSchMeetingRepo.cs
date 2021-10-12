@@ -19,4 +19,17 @@ namespace Demo.InspectSchMeetings
 
     }
 }
+
+    public class InspectProjHeadRepo : EfCoreRepository<DemoDbContext, InspectProjHead, int>,
+        IInspectProjHeadRepo
+    {
+        public InspectProjHeadRepo(
+         IDbContextProvider<DemoDbContext> dbContextProvider)
+         : base(dbContextProvider)
+        {
+
+        }
+    }
+
+
 }

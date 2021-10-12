@@ -10,4 +10,8 @@ namespace Demo.InspectSchMeetings
     public interface IInspectSchMeetingRepo : IRepository<InspectSchMeeting,int>
     {
     }
+
+    public interface IInspectProjHeadRepo : IRepository<InspectProjHead, int>
+    {
+    }
 }

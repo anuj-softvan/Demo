@@ -16,18 +16,16 @@ namespace Demo.InspectMasterCategory
 
         public async Task<InspectMstCategoryDto> CreateAsync(CreateUpdateInspectMstCategoryDto input)
         {
-            var inspectMstCategory = ObjectMapper.Map<CreateUpdateInspectMstCategoryDto, InspectMstCategory>(input);
+            InspectMstCategory inspectMstCategory;
+            
             if (input.Id > 0) {
                 var insMstCategory = await _inspectMstCategories.GetAsync(input.Id);
-                insMstCategory.OrgID = input.OrgID;
-                insMstCategory.InspectCatIdnCode = input.InspectCatIdnCode;
-                insMstCategory.PermitIdnCode = input.PermitIdnCode;
-                insMstCategory.AppTypeIdnCode = input.AppTypeIdnCode;
-                insMstCategory.ChkFormID = input.ChkFormID;
-                await _inspectMstCategories.UpdateAsync(insMstCategory);
+                inspectMstCategory = ObjectMapper.Map(input, insMstCategory);               
+                await _inspectMstCategories.UpdateAsync(inspectMstCategory);
             }
             else
-            {                
+            {     
+                inspectMstCategory = ObjectMapper.Map<CreateUpdateInspectMstCategoryDto, InspectMstCategory>(input);
                 await _inspectMstCategories.InsertAsync(inspectMstCategory);
             }                        
             return ObjectMapper.Map<InspectMstCategory, InspectMstCategoryDto>(inspectMstCategory);

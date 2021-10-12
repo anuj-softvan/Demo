@@ -7,6 +7,7 @@ namespace Demo.InspectSchMeetings
     public class CreateUpdateInspectSchMeetingDto
     {
        // public int InsProjHeadID { get; set; }
+        public int Id { get; set; }
         public MeetingType MeetingMode { get; set; }
         public DateTime MeetingDate { get; set; }
         public DateTime SlotStart { get; set; }
