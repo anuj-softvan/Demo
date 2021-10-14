@@ -255,7 +255,17 @@ namespace Demo.EntityFrameworkCore
                 b.Property(x => x.AppTypeIdnCode);
                 b.Property(x => x.ChkFormID);
             });
-
+            builder.Entity<InspectSchAssignStaff>(b =>
+            {
+                b.ToTable(DemoConsts.DbTablePrefix + "InspectSchAssignStaff",
+                    DemoConsts.DbSchema);
+                b.ConfigureByConvention(); //auto configure for the base class props
+                b.Property(x => x.StaffID);
+                b.Property(x => x.IsAccepted);
+                b.Property(x => x.AcceptedOn);
+                b.Property(x => x.AcceptRemarks).HasMaxLength(200);
+                b.HasOne<InspectSchMeeting>(c => c.InspectSchMeeting).WithMany(x => x.InspectSchAssignStaffs).HasForeignKey(x => x.InspectSchID).IsRequired();
+            });
             //        builder.Entity<InspectProjHead>()
             //.HasOne<InspectSchMeeting>(s => s.InspectSchMeeting)
             //.WithOne(ad => ad.InspectProjHead)

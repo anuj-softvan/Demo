@@ -49,6 +49,21 @@ namespace Demo.Controllers
             await _inspectSchMeetingAfl.DeleteAsync(id);
             return Ok();
         }
+        [HttpGet]
+        [Route("getfullslotdatelist")]
+        public async Task<IActionResult> GetFullSlotDatesList(Guid StaffID)
+        {
+            var SlotFullDates = await _inspectSchMeetingAfl.GetFullSlotDateList(StaffID);
+            return Ok(SlotFullDates);
+        }
+        [HttpPost]
+        [Route("createInspectAssignStaff")]
+        public async Task<IActionResult> CreateInspectAssignStaff(int InspectSchID,CreateInspectSchAssignStaffDto createInspectSchAssignStaffDto)
+        {
+            var inspectAssignStaff = await _inspectSchMeetingAfl.CreateInspectAssignStaff(InspectSchID,createInspectSchAssignStaffDto);
+            return Ok(inspectAssignStaff);
+
+        }
 
 
     }

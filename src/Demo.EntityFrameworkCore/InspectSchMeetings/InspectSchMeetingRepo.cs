@@ -32,4 +32,16 @@ namespace Demo.InspectSchMeetings
     }
 
 
+    public class InspectSchAssignStaffRepo : EfCoreRepository<DemoDbContext, InspectSchAssignStaff, int>,
+        IInspectSchAssignStaffRepo
+    {
+        public InspectSchAssignStaffRepo(
+         IDbContextProvider<DemoDbContext> dbContextProvider)
+         : base(dbContextProvider)
+        {
+
+        }
+    }
+
+
 }

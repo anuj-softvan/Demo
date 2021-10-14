@@ -32,6 +32,8 @@ namespace Demo
             CreateMap<InspectSchVirtualMeetInfoDto, InspectSchVirtualMeetInfo>();
             CreateMap<CreateUpdateInspectMstCategoryDto, InspectMstCategory>();
             CreateMap<InspectMstCategory, InspectMstCategoryDto>();
+            CreateMap<CreateInspectSchAssignStaffDto, InspectSchAssignStaff>();
+            CreateMap<InspectSchAssignStaff, InspectSchAssignStaffDto>();
             /* You can configure your AutoMapper mapping configuration here.
              * Alternatively, you can split your mapping configurations
              * into multiple profile classes for a better organization. */

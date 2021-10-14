@@ -15,5 +15,9 @@ namespace Demo.InspectSchMeetings
         Task UpdateAsync(int id, CreateUpdateInspectSchMeetingDto input);
 
         Task DeleteAsync(int id);
+
+        Task<List<DateTime>> GetFullSlotDateList(Guid StaffID);
+
+        Task<InspectSchAssignStaffDto> CreateInspectAssignStaff(int InspectSchID, CreateInspectSchAssignStaffDto createInspectSchAssignStaffDto);
     }
 }

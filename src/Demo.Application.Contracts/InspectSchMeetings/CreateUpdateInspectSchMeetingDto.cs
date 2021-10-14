@@ -14,4 +14,8 @@ namespace Demo.InspectSchMeetings
         public DateTime SlotEnd { get; set; }
         public byte MeetingStatus { get; set; }       
     }
+    public class CreateInspectSchAssignStaffDto
+    {
+        public Guid StaffID { get; set; }
+    }
 }

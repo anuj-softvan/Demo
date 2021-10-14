@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Demo.InspectMasterCategory;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -20,6 +21,7 @@ namespace Demo.InspectSchMeetings
         public int? InsProjHeadID { get; set; }       
         public InspectProjHead InspectProjHead { get; set; }
         public InspectSchVirtualMeetInfo InspectSchVirtualMeetInfo { get; set; }
+        public ICollection<InspectSchAssignStaff> InspectSchAssignStaffs { get; set; }
 
     }
     public class InspectProjHead : FullAuditedAggregateRoot<int>
@@ -38,5 +40,25 @@ namespace Demo.InspectSchMeetings
         public string MeetingLink { get; set; }
         public InspectSchMeeting InspectSchMeeting { get; set; }
 
+    }
+
+    public class InspectSchAssignStaff: FullAuditedAggregateRoot<int>
+    {
+        public Guid StaffID { get; set; }
+        public byte IsAccepted { get; set; }
+        public DateTime AcceptedOn { get; set; }
+        public string AcceptRemarks { get; set; }
+        public int InspectSchID { get; set; }
+        public InspectSchMeeting InspectSchMeeting { get; set; }
+
+    }
+
+    public class InspectAppCategory : FullAuditedAggregateRoot<int>
+    {
+        public int InsProjHeadID { get; set; }
+        public int PermitID { get; set; }
+        public int InsMstCatID { get; set; }
+        public InspectProjHead InspectProjHead { get; set; }
+        public InspectMstCategory InspectMstCategory { get; set; }
     }
 }

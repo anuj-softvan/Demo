@@ -19,4 +19,9 @@ namespace Demo.InspectSchMeetings
         public VirtualMeetApp VirtualMeetApp { get; set; }
         public string MeetingLink { get; set; }       
     }
+
+    public class InspectSchAssignStaffDto
+    {
+        public Guid StaffID { get; set; }
+    }
 }
